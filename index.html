@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Yatraमित्र — Travel Like a Local</title>
+<style>
+:root{--g:#087f8c;--g2:#e5f6f5;--gold:#d48a2d;--ink:#16333a;--muted:#66777d;--bg:#f7fbfc;--line:#d9e8eb;--red:#c43d43;--sand:#fff7e8}
+*{box-sizing:border-box}body{margin:0;font-family:system-ui,-apple-system,Segoe UI,sans-serif;background:linear-gradient(180deg,#f7fbfc 0%,#fffdf8 48%,#f7fbfc 100%);color:var(--ink)}
+nav{height:70px;background:#fff;border-bottom:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;padding:0 6%;position:sticky;top:0;z-index:20}.logo{font-size:22px;font-weight:850;color:var(--g)}.logo span{color:var(--gold)}
+nav button,.primary{border:0;background:var(--g);color:#fff;padding:11px 15px;border-radius:10px;font-weight:750;cursor:pointer}.danger{background:var(--red)!important}
+.hero,.wrap{max-width:1180px;margin:auto;padding:44px 6%}.hero{display:grid;grid-template-columns:1.05fr .95fr;gap:28px;align-items:center;background:radial-gradient(circle at 85% 20%,#dff5f1 0,transparent 32%),radial-gradient(circle at 15% 15%,#fff1d7 0,transparent 25%)}
+.badge,.tag{display:inline-block;background:var(--g2);color:var(--g);padding:6px 9px;border-radius:99px;font-size:11px;font-weight:800}.gold{background:#fff4dc;color:#8a611f}
+h1{font-size:clamp(40px,6vw,64px);line-height:1.02;margin:14px 0}.muted{color:var(--muted);font-size:14px;line-height:1.55}
+.box,.card{background:#fff;border:1px solid var(--line);border-radius:18px;padding:19px}.box input,.box select{width:100%;padding:12px;margin:6px 0 12px;border:1px solid var(--line);border-radius:9px;background:white}.row,.cards,.gallery,.guides{display:grid;gap:13px}.row{grid-template-columns:1fr 1fr}.cards{grid-template-columns:repeat(3,1fr)}.gallery{grid-template-columns:repeat(4,1fr);margin-top:14px}.gallery div{height:130px;border-radius:14px;padding:12px;color:white;display:flex;align-items:end;font-weight:800;background-size:cover;background-position:center}.gallery div:nth-child(1){background:linear-gradient(#0000,#0009),url("https://images.unsplash.com/photo-1561361058-c24cecae35ca?auto=format&fit=crop&w=700&q=80") center/cover}.gallery div:nth-child(2){background:linear-gradient(#0000,#0009),url("https://images.unsplash.com/photo-1548013146-72479768bada?auto=format&fit=crop&w=700&q=80") center/cover}.gallery div:nth-child(3){background:linear-gradient(#0000,#0009),url("https://images.unsplash.com/photo-1477587458883-47145ed94245?auto=format&fit=crop&w=700&q=80") center/cover}.gallery div:nth-child(4){background:linear-gradient(#0000,#0009),url("https://images.unsplash.com/photo-1524492412937-b28074a5d7da?auto=format&fit=crop&w=700&q=80") center/cover}
+.planner{display:none;margin-top:22px}.planner.show{display:block}.day{border-left:3px solid var(--g);padding-left:14px;margin:18px 0}.stop{display:flex;justify-content:space-between;border-bottom:1px solid #edf2ef;padding:9px 0;font-size:14px}.cost{font-size:29px;color:var(--g);font-weight:850}
+.feature{min-height:115px}.guides{grid-template-columns:repeat(3,1fr)}.guide{padding:16px;border:1px solid var(--line);border-radius:14px;background:#fff}.guide b{display:block;margin:6px 0}.earn{background:var(--g2);border-radius:16px;padding:18px;margin-top:16px}
+.modal{display:none;position:fixed;inset:0;background:#0008;z-index:50;align-items:center;justify-content:center;padding:18px}.modal.show{display:flex}.modalbox{background:#fff;border-radius:18px;padding:22px;max-width:430px;width:100%}.modal-actions{display:grid;gap:10px;margin-top:15px}.modal-actions button{padding:14px;border:0;border-radius:10px;font-weight:800;cursor:pointer}.police{background:#eef4ff;color:#2455a4}.ambulance{background:#fff0f0;color:#b84343}.close{background:#eee;color:#333}
+footer{text-align:center;padding:25px;color:var(--muted);font-size:12px}
+@media(max-width:800px){.hero{grid-template-columns:1fr}.cards,.guides{grid-template-columns:1fr 1fr}.gallery{grid-template-columns:1fr 1fr}}@media(max-width:500px){.cards,.guides,.row{grid-template-columns:1fr}}
+
+.food-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:15px;margin-top:16px}
+.food-card{overflow:hidden;background:#fff;border:1px solid var(--line);border-radius:16px}
+.food-card img{width:100%;height:170px;object-fit:cover;display:block}
+.food-body{padding:15px}.food-body h3{margin:4px 0}.food-body .dish{color:var(--g);font-weight:800;font-size:13px}.food-actions{display:flex;gap:8px;flex-wrap:wrap;margin-top:10px}.food-actions a{font-size:12px;text-decoration:none;padding:9px 11px;border-radius:9px}
+@media(max-width:800px){.food-grid{grid-template-columns:1fr 1fr}}@media(max-width:500px){.food-grid{grid-template-columns:1fr}}
+
+.tour-banner{margin:10px 0 30px;padding:24px;border-radius:22px;background:linear-gradient(120deg,#e5f6f5,#fff7e8);border:1px solid var(--line);display:flex;justify-content:space-between;align-items:center;gap:20px}.tour-icons{font-size:28px;white-space:nowrap}
+.emergency-card{border-radius:18px;padding:18px;background:linear-gradient(135deg,#fff7f7,#fff);border:1px solid #f0d5d5}
+.modalbox{box-shadow:0 25px 70px #16322833}.modal-actions a{display:block;padding:15px;border-radius:12px;font-weight:850;text-align:center;text-decoration:none}.police{background:#eef4ff;color:#2455a4}.ambulance{background:#fff0f0;color:#b84343}
+@media(max-width:700px){.tour-banner{flex-direction:column;align-items:flex-start}.tour-icons{white-space:normal}}
+</style>
+</head>
+<body>
+<nav><div class="logo">🧭 Yatra<span>मित्र</span></div><button id="emergency">🆘 Emergency</button></nav>
+
+<section class="hero">
+<div><span class="badge">SMART TOURISM • HIDDEN INDIA</span><h1>Explore like a local.<br><span style="color:var(--g)">Travel safer.</span></h1><p class="muted" style="font-size:17px">Discover famous places, hidden gems, authentic food and verified local guides — while keeping your entire trip in one place.</p><div style="display:flex;gap:8px;flex-wrap:wrap;margin:18px 0">
+<span class="tag">🏛️ Heritage</span><span class="tag">🍲 Local Food</span><span class="tag">💎 Hidden Gems</span><span class="tag">🧑‍🏫 Local Guides</span>
+</div><button class="primary" id="start">Plan My Trip →</button></div>
+<div class="box" id="plannerBox"><h2 style="margin:0 0 4px">✨ AI Travel Planner</h2><p class="muted">Budget + duration + interests → personalized itinerary.</p>
+<label>Destination</label><input id="dest" value="Varanasi" placeholder="e.g. Varanasi">
+<div class="row"><div><label>Days</label><select id="days"><option>2</option><option selected>3</option><option>4</option><option>5</option></select></div><div><label>Budget</label><select id="budget"><option>₹3,000</option><option selected>₹5,000</option><option>₹10,000</option><option>₹20,000+</option></select></div></div>
+<label>Interests</label><select id="interest"><option>Food + Culture</option><option>Heritage + Spirituality</option><option>Nature + Adventure</option><option>Local Life + Shopping</option></select>
+<button class="primary" id="generate" style="width:100%">Generate AI itinerary</button></div>
+</section>
+
+<section class="wrap">
+<div class="tour-banner"><div><span class="badge">Yatraमित्र JOURNEY</span><h2 style="margin:8px 0">One trip. Every experience.</h2><p class="muted">Plan, book, explore, eat and stay safe — with local people at the heart of the journey.</p></div><div class="tour-icons">🗺️　🏨　🍲　🚕　🧑‍🏫　🆘</div></div>
+<h2>📍 Explore your destination</h2><p class="muted">Choose a city and see its visual highlights before planning.</p>
+<div class="box"><label>Location</label><select id="location"><option>Varanasi</option><option>Jaipur</option><option>Agra</option><option>Delhi</option><option>Goa</option><option>Amritsar</option><option>Rishikesh</option><option>Udaipur</option><option>Mumbai</option><option>Kolkata</option><option>Hyderabad</option></select></div>
+<div class="gallery" id="gallery">
+<div style="background-image:linear-gradient(#0000,#0009),url('https://commons.wikimedia.org/wiki/Special:FilePath/Kashi%20Vishwanath%20Temple%20in%202025.jpg?width=1000')">🛕 Kashi Vishwanath Temple</div>
+<div style="background-image:linear-gradient(#0000,#0009),url('https://commons.wikimedia.org/wiki/Special:FilePath/Ganga%20Aarti%20Varanasi.jpg?width=1000')">🪔 Ganga Aarti</div>
+<div style="background-image:linear-gradient(#0000,#0009),url('https://commons.wikimedia.org/wiki/Special:FilePath/Dhamek%20Stupa%20at%20Sarnath%20UP.jpg?width=1000')">☸️ Sarnath</div>
+<div style="background-image:linear-gradient(#0000,#0009),url('https://commons.wikimedia.org/wiki/Special:FilePath/Ganga%20Ghats%20Varanasi.jpg?width=1000')">🌊 Ganga Ghats</div>
+</div><div>Kashi Vishwanath</div><div>Old City</div></div>
+
+<div class="planner" id="result">
+<div style="display:flex;justify-content:space-between;gap:15px;flex-wrap:wrap">
+<div><span class="badge">AI ITINERARY</span><h2 id="title">Your Varanasi Plan</h2><p class="muted" id="planNote">Curated around real attractions and practical routing.</p></div>
+<div><small class="muted">Estimated local spend</small><div class="cost" id="cost">₹4,650</div></div></div>
+<div id="itineraryContent"></div>
+</div>
+
+<h2 style="margin-top:38px">🍲 Eat Like a Local</h2>
+<p class="muted">Not just the dish — discover the local spot famous for it, with photos and directions.</p>
+<div class="food-grid" id="foodGrid"></div>
+
+<h2 style="margin-top:38px">🧑‍🏫 Meet local guides</h2><p class="muted">Travelers get local knowledge. Locals get an opportunity to earn.</p>
+<div class="guides">
+<div class="guide">⭐ 4.9 <b>Rahul · Heritage Guide</b><span class="muted">Varanasi · 5 years experience</span><br><span class="tag">₹500 / 2 hrs</span> <span class="tag">Hindi + English</span><br><button class="primary guideBook" style="margin-top:10px">Book Guide</button></div>
+<div class="guide">⭐ 4.8 <b>Meera · Food Walk Host</b><span class="muted">Varanasi · Local food specialist</span><br><span class="tag">₹700 / walk</span> <span class="tag">English + Hindi</span><br><button class="primary guideBook" style="margin-top:10px">Book Guide</button></div>
+<div class="guide">⭐ 4.9 <b>Aman · Culture Explorer</b><span class="muted">Varanasi · Hidden-gem specialist</span><br><span class="tag">₹600 / 2 hrs</span> <span class="tag">Hindi + English</span><br><button class="primary guideBook" style="margin-top:10px">Book Guide</button></div>
+</div>
+<div class="earn"><h3 style="margin:0">💰 Become a Yatraमित्र Guide</h3><p class="muted">Know your city well? Create a local guide profile, offer experiences and earn from every booking.</p><button class="primary" id="join">Become a Guide →</button></div>
+
+
+<h2 style="margin-top:38px">Book, explore & earn</h2>
+<div class="cards">
+<div class="card feature"><div>🎟️</div><h3>Book Tickets</h3><p class="muted">Continue to MakeMyTrip for flights, hotels and travel bookings.</p><a class="primary" href="https://www.makemytrip.com/" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">Book Tickets ↗</a></div>
+<div class="card feature"><div>🚕</div><h3>Book Cab</h3><p class="muted">Continue to Uber for cab, auto and moto options.</p><a class="primary" href="https://www.uber.com/in/en/ride/" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">Book Cab ↗</a></div>
+<div class="card feature"><div>🏨</div><h3>Hotels</h3><p class="muted">Find a stay matched to your budget and trip plan.</p><a class="primary" href="https://www.makemytrip.com/" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">Find Stay ↗</a></div>
+<div class="card feature"><div>🗺️</div><h3>Smart Route</h3><p class="muted">Connect food, attractions, hidden gems and guide stops.</p><a class="primary" href="https://www.google.com/maps" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">Open Maps ↗</a></div>
+<div class="card feature"><div>🍲</div><h3>Food Passport</h3><p class="muted">Collect local dishes and discover authentic food experiences.</p><a class="primary" href="https://www.google.com/search?q=authentic+local+food+near+me" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">Find Local Food ↗</a></div>
+<div class="card feature"><div>💰</div><h3>Trip Wallet</h3><p class="muted">See your planned spend before you travel.</p><a class="primary" href="#plannerBox" style="display:inline-block;text-decoration:none">Open Trip Budget ↗</a></div>
+<div class="card feature"><div>🌐</div><h3>Travel Translator</h3><p class="muted">Quick local phrases for food, transport and emergencies.</p><a class="primary" href="https://translate.google.com/" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">Open Translator ↗</a></div>
+<div class="card feature"><div>💎</div><h3>Hidden Gem Radar</h3><p class="muted">Find lesser-known places around your chosen destination.</p><a class="primary" href="https://www.google.com/search?q=hidden+gems+near+me" target="_blank" rel="noopener" style="display:inline-block;text-decoration:none">Discover Gems ↗</a></div>
+<div class="card feature"><div>🎒</div><h3>Digital Travel Pass</h3><p class="muted">One screen for itinerary, guide, bookings and emergency help.</p><a class="primary" href="#result" style="display:inline-block;text-decoration:none">Open Travel Pass ↗</a></div>
+</div>
+<div class="box" style="margin-top:22px">
+<h2>🧑‍🏫 Become a Local Guide & Earn</h2>
+<p class="muted">Turn your local knowledge into bookable experiences. Add your city, languages, skills, experience and price.</p>
+<button class="primary" id="join">Create Guide Profile →</button>
+</div>
+</section>
+<div class="modal" id="guideModal"><div class="modalbox">
+<h2>🧑‍🏫 Guide Registration</h2><p class="muted">Create your local guide profile.</p>
+<label>Full name</label><input id="gname" placeholder="Your name">
+<label>City</label><select id="gcity"><option>Varanasi</option><option>Jaipur</option><option>Agra</option><option>Delhi</option><option>Goa</option><option>Amritsar</option><option>Rishikesh</option><option>Udaipur</option><option>Mumbai</option><option>Kolkata</option><option>Hyderabad</option><option>Other</option></select>
+<label>Languages</label><input id="glang" placeholder="Hindi, English, Bengali...">
+<label>Guide category</label><select><option>Heritage & History</option><option>Food Walks</option><option>Photography</option><option>Local Shopping</option><option>Nature & Adventure</option><option>Spiritual / Cultural</option></select>
+<label>Experience</label><input id="gexp" placeholder="e.g. 3 years">
+<label>Price per experience</label><input id="gprice" placeholder="₹500">
+<div class="modal-actions"><button class="primary" id="submitGuide">Submit for Verification</button><button class="close" id="closeGuide">Close</button></div>
+</div></div>
+<div class="modal id="modal"><div class="modalbox"><h2>🆘 Emergency Assistance</h2><p class="muted">Choose what you need. On a real deployment, these buttons can be wired to the appropriate emergency service.</p><div class="modal-actions"><a class="police" id="police" href="tel:100" style="display:block;text-align:center;text-decoration:none">🚓 Call Police — 100</a><a class="ambulance" id="ambulance" href="tel:112" style="display:block;text-align:center;text-decoration:none">🚑 Call Ambulance — 112</a><button class="close" id="close">Close</button></div></div></div>
+
+<div class="modal" id="bookModal"><div class="modalbox">
+<h2>🧑‍🏫 Book a Local Guide</h2><p class="muted">Choose an experience and payment method.</p>
+<select id="bookType"><option>Heritage Walk — ₹500</option><option>Food Walk — ₹700</option><option>Hidden Gems Tour — ₹600</option><option>Photography Walk — ₹800</option></select>
+<select id="payMethod"><option>UPI</option><option>Credit / Debit Card</option><option>Net Banking</option></select>
+<div class="modal-actions"><button class="primary" id="pay">Continue to Payment</button><button class="close" id="closeBook">Cancel</button></div>
+</div></div>
+<footer>Yatraमित्र · Smart India Hackathon 2026 prototype · Demo data</footer>
+
+
+<script>
+const foodData={
+Varanasi:[
+["Kashi Chaat Bhandar","Tamatar Chaat / Banarasi Chaat","https://assets.st-note.com/img/1696052610711-NsgTNxfpzh.jpg?width=1200","Godowlia, Varanasi"],
+["Shiv Prasad Lassi Bhandar","Rabri-Malai Lassi","https://visitkashi.in/storage/things-to-do/local-food/ramnagar-lassi.jpg","Near Ramnagar Fort, Ramnagar, Varanasi"],
+["VT Cafe & Temple","BHU Cold Coffee","https://static.newstrack.com/h-upload/2024/03/27/1697037-inshot20240327134444202.jpg","BHU Campus, Varanasi"]
+],
+Jaipur:[
+["Rawat Misthan Bhandar","Pyaaz Kachori / Mirchi Vada","https://www.thehosteller.com/_next/image/?url=https%3A%2F%2Fimages.ctfassets.net%2F3s5io6mnxfqz%2Frawat-jaipur%2Frawat.jpg&w=1200&q=75","Sindhi Camp, Jaipur"],
+["Lassiwala","Kulhad Lassi","https://pbs.twimg.com/profile_images/1303656825691152385/o2Rtr-55.jpg","MI Road, Jaipur"],
+["Laxmi Mishthan Bhandar (LMB)","Ghewar / Dal Baati Churma","https://s3-ap-southeast-1.amazonaws.com/img.tasteofcity.com/tasteimages/201508/image_original/72F0432C5F2A283D_ghewar02.jpg","Johari Bazaar, Jaipur"]
+],
+Agra:[
+["Panchhi Petha","Angoori / Kesar Petha","https://pricehistory.app/p/images/panchhi-petha.jpg","Agra"],
+["The Agra Chaat","Agra Chaat / Dahi Bhalla","https://agrasmartcity.in/wp-content/uploads/2020/12/street1.jpg","Sadar Bazar, Agra"]
+],
+Delhi:[
+["Sita Ram Diwan Chand","Chole Bhature","https://www.sitaramdiwanchand.co.in/images/slider-2.jpeg","Paharganj, Delhi"],
+["Paranthe Wali Gali","Stuffed Parathas","https://thebetterindia.com/wp-content/uploads/2024/05/paratha-delhi.jpg","Chandni Chowk, Delhi"],
+["Kuremal Mohan Lal Kulfi Wale","Fruit-stuffed Kulfi","https://images.unsplash.com/photo-1563805042-7684c019e1cb?auto=format&fit=crop&w=900&q=80","Chawri Bazar, Delhi"]
+],
+Goa:[
+["Kokni Kanteen","Goan Fish Thali","https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy%2Cf_auto%2Cq_auto%2Cw_300%2Ch_300%2Ce_grayscale%2Cc_fit/FOOD_CATALOG/IMAGES/CMS/2024/8/2/5cf86dd0-bcc8-43d5-8654-86288d20f902_59185522-6a10-4c19-9c8f-12bbe7ed8fb8.jpg","Panaji, Goa"],
+["The Fisherman's Wharf","Seafood / Goan Thali","https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=80","Panaji, Goa"]
+],
+Rishikesh:[
+["Chotiwala","Chotiwala Special Thali","https://wanderon-images.gumlet.io/gallery/new/2025/10/22/1761124504875-chotiwala-special-thali.webp","Swarg Ashram / Ram Jhula, Rishikesh"],
+["The Sitting Elephant","Ganga-view vegetarian dining","https://images.unsplash.com/photo-1546833999-b9f581a1996d?auto=format&fit=crop&w=900&q=80","Rishikesh"]
+],
+Udaipur:[
+["Krishna Dal Bati Restro","Dal Baati","https://restaurant-guru.ru/_next/image/?url=https%3A%2F%2Fimg.restaurantguru.ru%2Fc2e8-Restaurant-Krishna-Dal-Bati-Restro-food.jpg&w=900&q=80","Gulab Bagh, Udaipur"],
+["Traditional Khana","Rajasthani Thali","https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=80","Panchwati, Udaipur"]
+],
+Amritsar:[
+["Kulcha Land","Amritsari Kulcha","https://i0.wp.com/www.tusktravel.com/blog/wp-content/uploads/2021/03/Kulcha-Land-Amritsar.jpg?ssl=1&w=550","Maqbool Road, Amritsar"],
+["Bhai Kulwant Singh Kulchian Wale","Kulcha + Chole","https://cdn.sanity.io/images/omvn0o2l/production/14d1a2c1c74a3387c905011f48a5801a23797a7f-1536x1024.png?auto=format&q=75&w=800","Near Golden Temple, Amritsar"]
+],
+Mumbai:[
+["Aram Vada Pav","Vada Pav","https://media.assettype.com/saamtv%2F2025-05-09%2F3widswpx%2Fvada-pav-3.jpg?rect=0%2C89%2C720%2C960","Opp. CSMT, Mumbai"],
+["Ashok Vada Pav","Mumbai Vada Pav","https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=80","Dadar West, Mumbai"]
+],
+Kolkata:[
+["Hot Kati Rolls","Kathi Roll","https://assets.telegraphindia.com/telegraph/2025/Oct/1760508502_1634031927_roll-1.jpg","Park Street, Kolkata"],
+["Kusum Rolls","Kathi Roll","https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=80","Park Street, Kolkata"]
+],
+Hyderabad:[
+["Hotel Shadab","Mutton / Chicken Biryani","https://media-assets.swiggy.com/swiggy/image/upload/fl_lossy%2Cf_auto%2Cq_auto%2Cw_300%2Ch_300%2Cc_fit/FOOD_CATALOG/IMAGES/CMS/2025/9/4/9e2cf72a-916e-4a1d-8ab9-67abb83a4085_632e6515-3b1b-4154-8944-913bd0c7e298.jpg","Near Charminar, Hyderabad"],
+["Pista House","Haleem","https://images.unsplash.com/photo-1601050690597-df0568f70950?auto=format&fit=crop&w=900&q=80","Shah Ali Banda, Hyderabad"],
+["Nimrah Cafe","Irani Chai + Osmania Biscuit","https://images.unsplash.com/photo-1571934811356-5cc061b6821f?auto=format&fit=crop&w=900&q=80","Near Charminar, Hyderabad"]
+]};
+
+function foodMapsUrl(name,city){return "https://www.google.com/maps/search/?api=1&query="+encodeURIComponent(name+" "+city);}
+function renderFood(city){
+ const items=foodData[city]||foodData.Varanasi;
+ const grid=document.getElementById('foodGrid');
+ if(!grid)return;
+ grid.innerHTML=items.map(x=>`<article class="food-card">
+ <img src="${x[2]}" alt="${x[1]} at ${x[0]}" onerror="this.style.display='none'">
+ <div class="food-body"><span class="tag">LOCAL FAVOURITE</span><h3>${x[0]}</h3><div class="dish">🍽️ ${x[1]}</div><p class="muted">📍 ${x[3]}</p>
+ <div class="food-actions"><a class="primary" href="${foodMapsUrl(x[0],city)}" target="_blank" rel="noopener">Open Maps ↗</a><a style="background:#f0f5f2;color:#176b4d" href="https://www.google.com/search?q=${encodeURIComponent(x[0]+" "+x[1]+" "+city)}" target="_blank" rel="noopener">See Reviews ↗</a></div>
+ </div></article>`).join('');
+}
+renderFood('Varanasi');
+</script>
+
+<script>
+const result=document.getElementById('result'),modal=document.getElementById('modal');
+document.getElementById('start').addEventListener('click',()=>document.getElementById('plannerBox').scrollIntoView({behavior:'smooth'}));
+
+});
+
+
+document.getElementById('join').onclick=()=>alert('Guide onboarding demo: create profile → verify identity → add local experiences → set price → receive bookings.');
+
+
+const guideModal=document.getElementById('guideModal'), bookModal=document.getElementById('bookModal');
+document.querySelectorAll('.guideBook').forEach(b=>b.addEventListener('click',()=>bookModal.classList.add('show')));
+document.getElementById('closeBook').onclick=()=>bookModal.classList.remove('show');
+document.getElementById('pay').onclick=()=>alert('Payment demo: UPI / Card / Net Banking checkout would open here. Booking is not charged in this prototype.');
+document.getElementById('join').onclick=()=>guideModal.classList.add('show');
+document.getElementById('closeGuide').onclick=()=>guideModal.classList.remove('show');
+document.getElementById('submitGuide').onclick=()=>{if(!document.getElementById('gname').value.trim()){alert('Please enter your name.');return} guideModal.classList.remove('show');alert('Guide profile submitted for verification. In the full product, verified guides can receive bookings and earnings.');};
+
+
+
+
+
+
+
+const emergencyButton=document.getElementById('emergency');
+const emergencyModal=document.getElementById('modal');
+const closeEmergency=document.getElementById('closeEmergency');
+if(emergencyButton && emergencyModal){
+ emergencyButton.addEventListener('click',()=>{emergencyModal.classList.add('show');emergencyModal.setAttribute('aria-hidden','false');});
+}
+if(closeEmergency){
+ closeEmergency.addEventListener('click',e=>{e.preventDefault();emergencyModal.classList.remove('show');emergencyModal.setAttribute('aria-hidden','true');});
+}
+if(emergencyModal){
+ emergencyModal.addEventListener('click',e=>{if(e.target===emergencyModal){emergencyModal.classList.remove('show');}});
+}
+</script>
+
+<script>
+(function () {
+  const DATA = {
+    "Varanasi": {
+      cost:"₹4,650", note:"3-day Kashi heritage, spirituality & local-food route",
+      days:[
+        ["Day 1 · Kashi Core",[
+          ["🌅 Assi Ghat sunrise","₹0–100"],["🛕 Sankat Mochan Hanuman Temple","₹0"],
+          ["🏛️ BHU Vishwanath Temple","₹0"],["🍲 Banarasi breakfast/lunch","₹250–500"],
+          ["🛕 Kashi Vishwanath Temple","₹0–300*"],["🪔 Dashashwamedh Ghat + Ganga Aarti","₹0–300"]]],
+        ["Day 2 · Old Kashi + Ramnagar",[
+          ["🛕 Gauri Kedareshwar Temple","₹0"],["🚶 Kedar Ghat & old-city lanes","₹0"],
+          ["🍲 Kachori-sabzi + lassi","₹150–300"],["🏰 Ramnagar Fort","₹100–250*"],
+          ["🌊 Ganga riverside evening","₹0–200"]]],
+        ["Day 3 · Sarnath + Culture",[
+          ["☸️ Sarnath / Dhamek Stupa","₹50–300*"],["🏛️ Sarnath Museum / archaeological zone","₹50–300*"],
+          ["🍵 Banarasi snack stop","₹150–300"],["🧵 Banarasi silk & craft shopping","Flexible"],
+          ["🛍️ Godowlia / Vishwanath Gali","Flexible"]]]
+      ]
+    },
+    "Jaipur": {
+      cost:"₹6,200", note:"3-day Pink City, forts & royal heritage route",
+      days:[
+        ["Day 1 · Pink City",[["🏰 City Palace","₹200–500*"],["🔭 Jantar Mantar","₹50–200*"],["🌬️ Hawa Mahal","₹50–200*"],["🛍️ Johari/Bapu Bazaar","Flexible"],["🍲 Rajasthani thali","₹300–600"]]],
+        ["Day 2 · Amer Circuit",[["🏯 Amber Fort","₹100–500*"],["💧 Panna Meena ka Kund","₹0–100"],["🏛️ Jaigarh Fort","₹100–200*"],["🌅 Jal Mahal photo stop","₹0"],["🍛 Local dinner","₹300–600"]]],
+        ["Day 3 · Culture + Sunset",[["🌿 Albert Hall Museum","₹50–300*"],["🕌 Galtaji Temple","₹0–100"],["🌄 Nahargarh Fort sunset","₹50–200*"],["🍵 Kachori + chai","₹100–250"]]]
+      ]
+    },
+    "Agra": {
+      cost:"₹4,800", note:"2-day Mughal heritage route",
+      days:[
+        ["Day 1 · Taj + Agra",[["🌅  sunrise","₹50–1,100*"],["🏰 Agra Fort","₹50–650*"],["🍲 Mughlai lunch","₹300–600"],["🌳 Mehtab Bagh sunset","₹50–200*"],["🍨 Petha tasting","₹100–250"]]],
+        ["Day 2 · Mughal Agra",[["🏛️ Itmad-ud-Daulah","₹30–300*"],["🕌 Akbar's Tomb, Sikandra","₹30–300*"],["🛍️ Marble/craft market","Flexible"],["🍲 Local breakfast","₹150–300"]]]
+      ]
+    },
+    "Delhi": {
+      cost:"₹5,200", note:"3-day Old Delhi, Mughal & central Delhi circuit",
+      days:[
+        ["Day 1 · Old Delhi",[["🏰 Red Fort","₹35–500*"],["🕌 Jama Masjid","₹0–300*"],["🍲 Chandni Chowk food walk","₹300–700"],["🛍️ Chandni Chowk","Flexible"]]],
+        ["Day 2 · South Delhi",[["🏛️ Humayun's Tomb","₹35–500*"],["🗼 Qutub Minar","₹35–500*"],["🌿 Mehrauli Archaeological Park","₹0"],["🪷 Lotus Temple","₹0"],["🍲 CR Park food","₹250–500"]]],
+        ["Day 3 · Central Delhi",[["🇮🇳 India Gate","₹0"],["🔭 Jantar Mantar","₹20–100*"],["🪜 Agrasen Ki Baoli","₹0"],["🙏 Bangla Sahib","₹0"],["🌳 Lodhi Garden","₹0"]]]
+      ]
+    },
+    "Goa": {
+      cost:"₹7,500", note:"3-day Old Goa + North Goa + beach circuit",
+      days:[
+        ["Day 1 · Old Goa + Panaji",[["⛪ Basilica of Bom Jesus","₹0"],["⛪ Se Cathedral","₹0"],["🏛️ Panaji Latin Quarter","₹0"],["🍲 Goan local lunch","₹300–700"],["🌅 Miramar/Mandovi sunset","₹0"]]],
+        ["Day 2 · North Goa",[["🏰 Fort Aguada","₹0–100*"],["🏖️ Sinquerim/Candolim","₹0"],["🏖️ Calangute/Baga","₹0"],["🌅 Anjuna/Vagator sunset","₹0"],["🍤 Goan dinner","₹400–900"]]],
+        ["Day 3 · Slow Goa",[["🏖️ Morjim/Ashwem","₹0"],["🌴 Arambol","₹0"],["🍲 Local café/seafood","₹300–700"],["🛍️ Local market","Flexible"]]]
+      ]
+    },
+    "Rishikesh": {
+      cost:"₹5,500", note:"3-day Ganga, yoga, adventure & spiritual route",
+      days:[
+        ["Day 1 · Ganga & Ashrams",[["🌊 Triveni Ghat","₹0"],["🧘 Parmarth Niketan","₹0"],["🌉 Ram Jhula area","₹0"],["🌉 Lakshman Jhula area","₹0"],["🔥 Ganga Aarti","₹0"]]],
+        ["Day 2 · Adventure",[["🛶 River rafting","₹800–1,500*"],["🌊 Neer Garh Waterfall","₹30–100*"],["🌿 Beatles Ashram","₹50–200*"],["🍲 Local meal","₹250–500"]]],
+        ["Day 3 · Temple + Slow Travel",[["🛕 Neelkanth Mahadev Temple","₹0"],["🌲 Riverside walk","₹0"],["🧘 Yoga session","₹300–1,000*"],["🍲 Vegetarian dinner","₹250–500"]]]
+      ]
+    },
+    "Udaipur": {
+      cost:"₹6,500", note:"3-day lakes, palaces & Mewar heritage route",
+      days:[
+        ["Day 1 · City Palace + Lake Pichola",[["🏰 City Palace","₹300–1,000*"],["🛕 Jagdish Temple","₹0"],["⛵ Lake Pichola boat ride","₹400–1,000*"],["🌅 Gangaur Ghat sunset","₹0"],["🍲 Rajasthani dinner","₹300–700"]]],
+        ["Day 2 · Lakes + Monsoon Palace",[["🌊 Fateh Sagar Lake","₹0"],["🎨 Saheliyon-ki-Bari","₹20–100*"],["🌄 Sajjangarh/Monsoon Palace","₹100–500*"],["🍵 Local café","₹200–500"]]],
+        ["Day 3 · Culture",[["🎭 Bagore Ki Haveli","₹100–300*"],["🎨 Shilpgram","₹30–100*"],["🛍️ Hathipole/local crafts","Flexible"],["🌅 Lake Pichola sunset","₹0–500"]]]
+      ]
+    },
+    "Amritsar": {
+      cost:"₹4,500", note:"2-day Sikh heritage, food & border route",
+      days:[
+        ["Day 1 · Heritage",[["🛕 Golden Temple","₹0"],["🕯️ Jallianwala Bagh","₹0"],["🚶 Heritage Street","₹0"],["🍲 Amritsari kulcha","₹150–350"],["🛍️ Hall Bazaar","Flexible"]]],
+        ["Day 2 · Border + Culture",[["🇮🇳 Wagah–Attari ceremony","₹0*"],["🛕 Durgiana Temple","₹0–100"],["🍲 Amritsari food trail","₹300–600"],["🥛 Local lassi","₹80–150"]]]
+      ]
+    },
+    "Mumbai": {
+      cost:"₹6,800", note:"3-day South Mumbai, Elephanta & sea circuit",
+      days:[
+        ["Day 1 · South Mumbai",[["🚪 Gateway of India","₹0"],["🏛️ CSMT","₹0–100*"],["🎨 Kala Ghoda","₹0"],["🌊 Marine Drive sunset","₹0"],["🍲 Vada pav/pav bhaji","₹100–300"]]],
+        ["Day 2 · Elephanta + Colaba",[["⛴️ Elephanta Caves","₹200–500*"],["🚶 Colaba Causeway","Flexible"],["🏛️ Gateway area","₹0"],["🍲 Irani café","₹250–600"]]],
+        ["Day 3 · City Life",[["🌿 Sanjay Gandhi National Park","₹50–300*"],["🛕 Kanheri Caves","₹30–300*"],["🍲 Street food trail","₹250–500"],["🌆 Bandra sea view","₹0"]]]
+      ]
+    },
+    "Kolkata": {
+      cost:"₹4,800", note:"3-day colonial, cultural, spiritual & food route",
+      days:[
+        ["Day 1 · Colonial Kolkata",[["🏛️ Victoria Memorial","₹30–500*"],["🌳 Maidan","₹0"],["⛪ St. Paul's Cathedral","₹0"],["🍲 Bengali lunch","₹300–600"],["🌉 Howrah Bridge view","₹0"]]],
+        ["Day 2 · Culture + Spirituality",[["🛕 Kalighat Temple","₹0"],["🏛️ Indian Museum","₹20–500*"],["📚 College Street","Flexible"],["☕ Coffee House","₹100–300"],["🍰 Bengali sweets","₹100–250"]]],
+        ["Day 3 · River + Local Life",[["🛕 Dakshineswar Kali Temple","₹0"],["🌊 Hooghly riverside","₹0–200"],["🛍️ New Market","Flexible"],["🍲 Bengali food trail","₹300–600"]]]
+      ]
+    },
+    "Hyderabad": {
+      cost:"₹4,900", note:"2-day Nizami heritage & old-city food route",
+      days:[
+        ["Day 1 · Old Hyderabad",[["🕌 Charminar","₹20–300*"],["🏛️ Chowmahalla Palace","₹100–300*"],["🛍️ Laad Bazaar","Flexible"],["🕌 Mecca Masjid","₹0"],["🍲 Hyderabadi biryani","₹250–600"]]],
+        ["Day 2 · Fort + Culture",[["🏰 Golconda Fort","₹25–300*"],["🕌 Qutb Shahi Tombs","₹20–200*"],["🌅 Sunset/light show if scheduled","Varies"],["🍵 Irani chai + Osmania biscuit","₹80–180"]]]
+      ]
+    }
+  };
+
+  function renderItinerary(city){
+    const data=DATA[city]||DATA.Varanasi;
+    const title=document.getElementById("title"), note=document.getElementById("planNote");
+    const cost=document.getElementById("cost"), box=document.getElementById("result");
+    const content=document.getElementById("itineraryContent");
+    if(!title||!note||!cost||!box||!content)return;
+    title.textContent="Your "+city+" Plan";
+    note.textContent=data.note;
+    cost.textContent=data.cost;
+    content.innerHTML=data.days.map(day=>{
+      return '<div class="day"><h3>'+day[0]+'</h3>'+
+        day[1].map(stop=>'<div class="stop"><span>'+stop[0]+'</span><b>'+stop[1]+'</b></div>').join('')+
+        '</div>';
+    }).join('')+'<p class="muted">* Indicative prices. Verify current entry fees, timings and availability before travel.</p>';
+    box.classList.add("show");
+  }
+
+  document.addEventListener("DOMContentLoaded",function(){
+    const dest=document.getElementById("dest");
+    const location=document.getElementById("location");
+    const generate=document.getElementById("generate");
+    if(location){
+      location.addEventListener("change",function(){
+        const city=this.value;
+        if(dest)dest.value=city;
+        renderItinerary(city);
+      });
+    }
+    if(generate){
+      generate.addEventListener("click",function(){
+        const typed=(dest&&dest.value.trim())||"Varanasi";
+        const city=DATA[typed]?typed:"Varanasi";
+        if(dest)dest.value=city;
+        renderItinerary(city);
+      });
+    }
+    renderItinerary("Varanasi");
+  });
+})();
+</script>
+
+</body></html>
